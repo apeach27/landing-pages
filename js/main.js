@@ -15,7 +15,10 @@ searchInputEl.addEventListener('blur', function () {
     searchInputEl.setAttribute('placeholder', '');
 });
 
+
 const badgeEl = document.querySelector('header .badges');
+const toTopEl = document.querySelector('#to-top');
+
 window.addEventListener('scroll', _.throttle(function () {
     console.log('window.scrollY');
     if (window.scrollY > 500) {
@@ -26,16 +29,32 @@ window.addEventListener('scroll', _.throttle(function () {
             opacity: 0,
             display: 'none'
         });
+        // 버튼 보이기 
+        // 상단으로 스크롤 버튼 보이기!
+        gsap.to(toTopEl, .2, {
+            x: 0
+        })    
+  
     } else {
-        // 배지 보이기
+        
         /* badgeEl.style.display = 'block'; */
         gsap.to(badgeEl, .6, {
             opacity: 1,
             display: 'block'
         });
+    // 상단으로 스크롤 버튼 숨기기!
+        gsap.to(toTopEl, .2, {
+            x: 100
+        })
     }
 }, 300));
 // _.throttle(함수, 시간)
+
+toTopEl.addEventListener('click', function () {
+    gsap.to(window, .7, {
+        scrollTo: 0
+    });
+})
 
 const fadeEls = document.querySelectorAll('.visual .fade-in');
 fadeEls.forEach(function (fadeEl, index) {
@@ -69,6 +88,17 @@ new Swiper('.promotion .swiper-container', {
         nextEl: '.promotion .swiper-next'
     }
 });
+new Swiper('.awards .swiper-container', {
+    autoplay: true,
+    loop: true,
+    spaceBetween: 20,
+    slidesPerView: 4,
+    navigation: {
+        prevEl: '.awards .swiper-prev',
+        nextEl: '.awards .swiper-next'
+    }
+});
+
 
 const promotionEl = document.querySelector('.promotion');
 const promotionToggleBtn = document.querySelector('.toggle-promotion');
@@ -118,6 +148,9 @@ spyEls.forEach(function (spyEl) {
             triggerElement: spyEl,  // 보여짐 여부를 감시할 요소 지정
             triggerHook: .8  // 화면의 80% 지점에서 보여짐 여부 감시
         })
-        .setClassToggle()
-        .addTo();
+        .setClassToggle(spyEl, 'show')
+        .addTo(new ScrollMagic.Controller());
 });
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear();    // 2022
