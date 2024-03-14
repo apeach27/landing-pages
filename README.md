@@ -1,6 +1,5 @@
 # landing-pages
 https://pensive-kare-002674.netlify.app
 
-Signin Branch 생성<br/>
-로그인페이지 랜더링<br/>
-Signin Branch Pull Request
+- 스타벅스 랜딩 페이지
+- 로그인 화면 구현
