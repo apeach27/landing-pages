@@ -1,4 +1,4 @@
-# STARBUCKS
+# landing-pages
 https://pensive-kare-002674.netlify.app
 
 Signin Branch 생성<br/>
